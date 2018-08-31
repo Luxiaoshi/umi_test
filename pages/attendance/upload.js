@@ -1,5 +1,4 @@
 import React from "react";
-import reqwest from 'reqwest';
 import { connect } from 'dva';
 import { Button, Card, Upload, message, Icon } from 'antd';
 
@@ -13,38 +12,6 @@ export default class AttendanceUpload extends React.Component {
   componentDidMount() {
   }
   handleUpload = () => {
-    const { fileList } = this.state;
-    const formData = new FormData();
-    let test = 1;
-    fileList.forEach((file) => {
-      formData.append(`${test}`, file);
-      test += 1;
-    });
-
-    this.setState({
-      uploading: true,
-    });
-
-    // You can use any AJAX library you like
-    reqwest({
-      url: '/api/deal',
-      method: 'post',
-      processData: false,
-      data: formData,
-      success: () => {
-        this.setState({
-          fileList: [],
-          uploading: false,
-        });
-        message.success('upload successfully.');
-      },
-      error: () => {
-        this.setState({
-          uploading: false,
-        });
-        message.error('upload failed.');
-      },
-    });
   }
 
   render() {
